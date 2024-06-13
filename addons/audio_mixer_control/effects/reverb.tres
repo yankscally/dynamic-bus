@@ -1,0 +1,4 @@
+[gd_resource type="AudioEffectReverb" format=3 uid="uid://df7nknddydkpx"]
+
+[resource]
+resource_local_to_scene = true

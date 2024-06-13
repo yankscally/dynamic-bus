@@ -1,0 +1,15 @@
+[gd_resource type="AudioEffectDelay" format=3 uid="uid://ddfjb2gj5hhdv"]
+
+[resource]
+tap1_active = false
+tap1_delay_ms = 545.0
+tap1_level_db = -7.25
+tap1_pan = -1.0
+tap2_active = false
+tap2_delay_ms = 300.0
+tap2_level_db = -12.55
+tap2_pan = 1.0
+feedback_active = true
+feedback_delay_ms = 305.0
+feedback_level_db = -6.65
+feedback_lowpass = 14880.0

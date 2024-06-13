@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://yx1w4fyuri3f"]
+
+[ext_resource type="FontFile" uid="uid://djsydx7kqwa0k" path="res://addons/audio_mixer_control/barlow.ttf" id="1_4gx3f"]
+[ext_resource type="Script" path="res://addons/audio_mixer_control/mixer/mixer_control.gd" id="1_rxo4x"]
+[ext_resource type="Script" path="res://addons/resizable/resizable.gd" id="3_2hjg0"]
+[ext_resource type="Script" path="res://layout/save_layout.gd" id="3_ojjtt"]
+
+[sub_resource type="Theme" id="Theme_t3ilt"]
+default_font = ExtResource("1_4gx3f")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awal5"]
+bg_color = Color(0.442126, 0.43573, 0.425971, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.17903, 0.17903, 0.17903, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="control_mixer" type="Control"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_t3ilt")
+script = ExtResource("1_rxo4x")
+pop_in_on_start = true
+
+[node name="resize" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_2hjg0")
+min_size = Vector2(280, 0)
+
+[node name="bg" type="Panel" parent="resize"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_awal5")
+
+[node name="margin" type="MarginContainer" parent="resize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="contents" type="VBoxContainer" parent="resize/margin"]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="mixer_controls" type="HBoxContainer" parent="resize/margin/contents"]
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="mixer_info" type="Label" parent="resize/margin/contents/mixer_controls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mixer"
+
+[node name="overlay" type="Panel" parent="resize/margin/contents/mixer_controls"]
+layout_mode = 2
+
+[node name="save_layout" type="Button" parent="resize/margin/contents/mixer_controls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "save layout.."
+script = ExtResource("3_ojjtt")
+
+[node name="add_bus" type="Button" parent="resize/margin/contents/mixer_controls"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text = "add bus+"
+
+[node name="bus_name" type="LineEdit" parent="resize/margin/contents/mixer_controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "bus"
+placeholder_text = "bus name.."
+
+[node name="pop_in" type="Button" parent="resize/margin/contents/mixer_controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "<"
+
+[node name="pop_out" type="Button" parent="resize/margin/contents/mixer_controls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = ">"
+
+[node name="scroll_buses" type="ScrollContainer" parent="resize/margin/contents"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="buses" type="HBoxContainer" parent="resize/margin/contents/scroll_buses"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="resize/margin/contents/mixer_controls/add_bus" to="." method="_on_add_bus_pressed"]
+[connection signal="text_changed" from="resize/margin/contents/mixer_controls/bus_name" to="." method="_on_bus_name_text_changed"]
+[connection signal="pressed" from="resize/margin/contents/mixer_controls/pop_in" to="." method="_on_pop_in_pressed"]
+[connection signal="pressed" from="resize/margin/contents/mixer_controls/pop_out" to="." method="_on_pop_out_pressed"]

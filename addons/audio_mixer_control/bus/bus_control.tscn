@@ -1,0 +1,269 @@
+[gd_scene load_steps=20 format=3 uid="uid://dt3diu0b7880l"]
+
+[ext_resource type="Script" path="res://addons/audio_mixer_control/bus/bus_control.gd" id="1_1ewfg"]
+[ext_resource type="Script" path="res://addons/resizable/resizable.gd" id="2_5v0xq"]
+[ext_resource type="Script" path="res://addons/audio_mixer_control/effect/select_effect.gd" id="2_8yc6k"]
+[ext_resource type="Script" path="res://addons/audio_db_meter/meter/audio_meter.gd" id="2_bv4bn"]
+[ext_resource type="Script" path="res://addons/audio_mixer_control/bus/bus_routing.gd" id="2_h7egf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c30rf"]
+bg_color = Color(0.268406, 0.268406, 0.268406, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iuvl8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqd1a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_774xx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiv6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dkpm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojkjp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_31k1l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0kqu3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5jddu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fnl63"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_38gto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vkpw5"]
+
+[sub_resource type="Theme" id="Theme_my31f"]
+
+[node name="control_bus" type="Panel"]
+auto_translate_mode = 1
+clip_contents = true
+custom_minimum_size = Vector2(45, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_c30rf")
+script = ExtResource("1_1ewfg")
+
+[node name="Resize" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("2_5v0xq")
+active = false
+active_handles = 12
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="contents" type="VBoxContainer" parent="margin"]
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+
+[node name="panel_controls" type="HBoxContainer" parent="margin/contents"]
+layout_mode = 2
+
+[node name="grabber" type="Button" parent="margin/contents/panel_controls"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iuvl8")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_tqd1a")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_774xx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_kiv6u")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7dkpm")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ojkjp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_31k1l")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_0kqu3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5jddu")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_fnl63")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_38gto")
+text = "="
+
+[node name="remove_bus" type="Button" parent="margin/contents/panel_controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+self_modulate = Color(1, 0, 0, 1)
+clip_contents = true
+custom_minimum_size = Vector2(17, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vkpw5")
+text = "x"
+text_overrun_behavior = 1
+
+[node name="main" type="HBoxContainer" parent="margin/contents"]
+layout_mode = 2
+
+[node name="index" type="Label" parent="margin/contents/main"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="name" type="LineEdit" parent="margin/contents/main"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Master"
+
+[node name="controls" type="HBoxContainer" parent="margin/contents"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+
+[node name="solo" type="Button" parent="margin/contents/controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+custom_minimum_size = Vector2(17, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "S"
+text_overrun_behavior = 1
+
+[node name="mute" type="Button" parent="margin/contents/controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+custom_minimum_size = Vector2(17, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "M"
+text_overrun_behavior = 1
+
+[node name="bypass" type="Button" parent="margin/contents/controls"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+custom_minimum_size = Vector2(17, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "B"
+text_overrun_behavior = 1
+
+[node name="bus_properties" type="HBoxContainer" parent="margin/contents"]
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="meter" type="HBoxContainer" parent="margin/contents/bus_properties"]
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="volume" type="VSlider" parent="margin/contents/bus_properties/meter"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+min_value = -80.0
+max_value = 6.0
+step = 0.1
+
+[node name="margin" type="MarginContainer" parent="margin/contents/bus_properties/meter"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="audio_meter" type="HBoxContainer" parent="margin/contents/bus_properties/meter/margin"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_bv4bn")
+
+[node name="effect_selection" type="Control" parent="margin/contents"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="margin" type="MarginContainer" parent="margin/contents/effect_selection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="panel" type="Panel" parent="margin/contents/effect_selection/margin"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="scroll" type="ScrollContainer" parent="margin/contents/effect_selection/margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="effects" type="VBoxContainer" parent="margin/contents/effect_selection/margin/scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_8yc6k")
+
+[node name="add_effect" type="MenuButton" parent="margin/contents/effect_selection/margin/scroll/effects"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_my31f")
+theme_override_font_sizes/font_size = 12
+text = "add effect.."
+expand_icon = true
+
+[node name="routing" type="OptionButton" parent="margin/contents"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 11
+text_overrun_behavior = 1
+clip_text = true
+script = ExtResource("2_h7egf")
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="button_down" from="margin/contents/panel_controls/grabber" to="." method="_on_grabber_button_down"]
+[connection signal="button_up" from="margin/contents/panel_controls/grabber" to="." method="_on_grabber_button_up"]
+[connection signal="pressed" from="margin/contents/panel_controls/grabber" to="." method="_on_grabber_pressed"]
+[connection signal="pressed" from="margin/contents/panel_controls/remove_bus" to="." method="_on_remove_bus_pressed"]
+[connection signal="text_changed" from="margin/contents/main/name" to="." method="_on_name_text_changed"]
+[connection signal="toggled" from="margin/contents/controls/solo" to="." method="_on_solo_toggled"]
+[connection signal="toggled" from="margin/contents/controls/mute" to="." method="_on_mute_toggled"]
+[connection signal="toggled" from="margin/contents/controls/bypass" to="." method="_on_bypass_toggled"]
+[connection signal="value_changed" from="margin/contents/bus_properties/meter/volume" to="." method="_on_volume_value_changed"]
+[connection signal="child_entered_tree" from="margin/contents/effect_selection/margin/scroll/effects" to="." method="_on_select_effect_child_entered_tree"]
+[connection signal="child_exiting_tree" from="margin/contents/effect_selection/margin/scroll/effects" to="." method="_on_select_effect_child_exiting_tree"]
+[connection signal="item_selected" from="margin/contents/routing" to="." method="_on_routing_item_selected"]

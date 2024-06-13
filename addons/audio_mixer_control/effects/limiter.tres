@@ -1,0 +1,4 @@
+[gd_resource type="AudioEffectLimiter" format=3 uid="uid://bnf6yfwkx15n1"]
+
+[resource]
+resource_local_to_scene = true

@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://udevye17o2pv"]
+
+[ext_resource type="Script" path="res://addons/audio_mixer_control/effect/effect_control.gd" id="1_k7s12"]
+
+[node name="control_effect" type="VBoxContainer"]
+auto_translate_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_k7s12")
+
+[node name="control_panel" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="active" type="CheckButton" parent="control_panel"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="effect" type="Button" parent="control_panel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+toggle_mode = true
+
+[node name="remove" type="Button" parent="control_panel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "remove"
+
+[connection signal="toggled" from="control_panel/active" to="." method="_on_active_toggled"]
+[connection signal="toggled" from="control_panel/effect" to="." method="_on_effect_toggled"]
+[connection signal="pressed" from="control_panel/remove" to="." method="_on_remove_pressed"]
